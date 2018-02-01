@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wall</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'dash_app/dash_app.css' %}">
+
+</head>
+
+<body>
+        <nav class="navbar navbar-fixed-top navbar-custom">
+            <div class="navbar-header col-2">
+                <a class="navbar-brand" href="/show/user/{{request.session.id}}">
+                    <p class="dashlink m-0">Dash App</p>
+                </a>
+            </div>
+            <ul class="nav navbar-nav col-1 text-center">
+                <li class="active">
+                    <a href="/show/user/{{request.session.id}}" class="white">Wall</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav col-2 text-center">
+                <li class="active">
+                    <a href="/dashboard" class="white">Dashboard</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav col-1 text-center">
+                <li class="active">
+                    <a href="/users/edit" class="white">Profile</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav col-6">
+                <li class="text-right">
+                    <a href="/logout" class="white">Log off</a>
+                </li>
+            </ul>
+        </nav>
+    <div class="container p-3">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger">{{message}}</div>
+        {% endfor %}
+        {% endif %}
+        <h3>{{user.first_name}} {{user.last_name}}</h3>
+        <br>
+        <div class="row">
+            <label>Registered at:</label>
+            <p class="m-0">{{user.created_at}}</p>
+        </div>
+        <div class="row">
+            <label>User ID:</label>
+            <p class="m-0"># {{user.id}}</p>
+        </div>
+        <div class="row">
+            <label>Email address:</label>
+            <p class="m-0"> {{user.email}}</p>
+        </div>
+        <div class="row">
+            <label>Description:</label>
+            <p class="m-0"> {{user.desc}}</p>
+        </div>
+        <br>
+        <!-- insert the template logic here -->
+        <h3>Leave a message for {{user.first_name}}</h3>
+        <form action="/message/{{user.id}}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <textarea type="text" class="form-control" name="message"></textarea>
+                <div class="form-group text-right mt-2">
+                    <input type="submit" class="btn btn-success" name="message_post" value="Post">
+                </div>
+            </div>
+        </form>
+        <br>
+        <div class="pl-5">
+            {% for post in msgs %}
+            <div class="text-left">
+                <p class="d-inline-block msg-head"><a href="/shift/{{post.poster.id}}">{{post.poster.first_name}} {{post.poster.last_name}}</a> wrote</p>
+                <p class="d-inline-block msg-time text-right">{{post.created_at}}</p>
+                <p class="blue box-blue pl-2">{{post.message}}</textarea>
+                {% for cmt in comments %}  
+                {% if post.id == cmt.message.id %}
+                <p class="d-inline-block msg-head"><a href="/shift/{{cmt.commentor.id}}">{{cmt.commentor.first_name}} {{cmt.commentor.last_name}}</a> wrote</p>
+                <p class="d-inline-block msg-time text-right">{{cmt.created_at}}</p>
+                <p class="green box-green pl-2">{{cmt.comment}}</p>
+                {% endif %}
+                {% endfor %}   
+                <form action="/comment/1" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" name="rel_message" value="{{post.id}}">
+                        <input type="hidden" class="form-control" name="commentor" value="{{request.session.id}}">
+                        <textarea type="text" class="form-control" name="comment" placeholder="write a message"></textarea>
+                        <div class="form-group text-right mt-2">
+                            <input type="submit" class="btn btn-success" name="comment_post" value="Post">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

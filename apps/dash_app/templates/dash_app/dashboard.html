@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>User Dashboard</title>
+        {% load static %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+            crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'dash_app/dash_app.css' %}">
+
+    </head>
+
+    <body>
+        <div class "container">
+            <nav class="navbar navbar-custom">
+                <div class="navbar-header col-2">
+                    <a class="navbar-brand" href="/show/user/{{request.session.id}}">
+                        <p class="dashlink m-0">Dash App</p>
+                    </a>
+                </div>
+                <ul class="nav navbar-nav col-1 text-center">
+                    <li class="active">
+                        <a href="/show/user/{{request.session.id}}" class="white">Wall</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav col-2 text-center">
+                    <li class="active">
+                        <a href="/dashboard" class="white">Dashboard</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav col-1 text-center">
+                    <li class="active">
+                        <a href="/users/edit" class="white">Profile</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav col-6">
+                    <li class="text-right">
+                        <a href="/logout" class="white">Log off</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container p-3">
+
+            {% if messages %} {% for message in messages %}
+            <div class="alert alert-danger">{{message}}</div>
+            {% endfor %} {% endif %}
+
+            <h3>All Users</h3>
+            <br>    
+            <table class="table table-striped">
+                <thead class="thead-secondary">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>email</th>
+                        <th>created_at</th>
+                        <th>user_level</th>
+                    </tr>
+                </thead>
+                <tbody>
+            {% for user in users %}
+                    <tr>
+                        <td scope="row">{{user.id}}</td>
+                        <td><a href="/shift/{{user.id}}">{{user.first_name}} {{user.last_name}}</a></td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.created_at}}</td>
+                        <td>{{user.user_level}}</td>
+                    </tr>
+            {% endfor %}
+                </tbody>
+            </table>    
+
+
+        </div>
+    </body>
+
+</html>

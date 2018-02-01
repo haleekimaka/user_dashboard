@@ -1,0 +1,82 @@
+label {
+    margin-left: 1.1em;
+    width: 12em;
+}
+
+.button {
+    text-align: right !important;
+    width: 40%;
+}
+
+.navbar-custom {
+    background-color: #6da9e9;
+}
+
+.messages {
+    color: #8f3636;
+}
+
+.dashlink {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 8px black;
+}
+textarea{
+    width: 100%
+}
+
+.comment {
+    width: 95%;
+}
+
+.white {
+    color: white;
+}
+
+.blue {
+    color: blue;
+    font-weight: bold;
+    font-size:  1.2em;
+}
+
+.box-blue {
+    border: 1px solid blue;
+}
+
+.green {
+    color: darkgreen;
+}
+
+.box-green {
+    border: 1px solid darkgreen;
+}
+
+.msg-head{
+    width: 77%;
+}
+
+.msg-time {
+    width: 22%;
+    font-style: italic;
+    color: gray;
+}
+
+.spacer {
+    width: 90%;
+}
+
+#edita {
+    width: 80%;
+}
+
+.max {
+    width: 100%;
+}
+
+.under {
+    text-decoration: underline;
+}
+.sized {
+    height: 100%;
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>New User</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'dash_app/dash_app.css' %}">
+
+</head>
+
+<body>
+    <div class "container">
+        <nav class="navbar navbar-custom">
+            <div class="navbar-header col-2">
+                <a class="navbar-brand" href="/show/user/{{request.session.id}}">
+                    <p class="dashlink m-0">Dash App</p>
+                </a>
+            </div>
+            <ul class="nav navbar-nav col-1 text-center">
+                <li class="active">
+                    <a href="/show/user/{{request.session.id}}" class="white">Wall</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav col-2 text-center">
+                <li class="active">
+                    <a href="/dashboard" class="white">Dashboard</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav col-1 text-center">
+                <li class="active">
+                    <a href="/users/edit" class="white">Profile</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav col-6">
+                <li class="text-right">
+                    <a href="/logout" class="white">Log off</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container p-3">
+        <h3>Add a new user</h3><br>
+         {% if messages %} {% for message in messages %}
+        <div class="alert alert-danger">{{message}}</div>
+        {% endfor %} {% endif %}
+        <form action="/add" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <div class="col-5">
+                    <input type="text" class="form-control d-inline" name="email">
+                    <br>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="f_name">First Name:</label>
+                <div class="col-5">
+                    <input type="text" class="form-control d-inline" name="f_name">
+                    <br>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="l_name">Last Name:</label>
+                <div class="col-5">
+                    <input type="text" class="form-control d-inline" name="l_name">
+                    <br>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password:</label>
+                <div class="col-5">
+                    <input type="password" class="form-control d-inline" name="pwd">
+                    <br>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pwd_c">Password Confirmation:</label>
+                <div class="col-5">
+                    <input type="password" class="form-control d-inline" name="pwd_c">
+                    <br>
+                </div>
+            </div>
+            <div class="form-group button">
+                <input type="submit" class="btn btn-success" name="submit" value="Create">
+            </div>
+        </form>
+        </div>
+    </div>
+</body>
+
+</html>

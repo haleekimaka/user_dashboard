@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Home</title>
+        {% load static %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+            crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'dash_app/dash_app.css' %}">
+
+    </head>
+    <body>
+        <div class "container">
+            <nav class="navbar navbar-custom">
+                    <div class="navbar-header col-2">
+                        <a class="navbar-brand" href="/"><p class="dashlink m-0">Dash App</p></a>
+                    </div>
+                    <ul class="nav navbar-nav col-8">
+                        <li class="active">
+                            <a href="/" class="white">Home</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav col-2">
+                        <li class="text-right">
+                            <a href="/signin" class="white">Sign In</a>
+                        </li>
+                    </ul>
+            </nav>
+        </div>
+        <div class"container p-3">
+            <br>
+            <div class="jumbotron ml-5 mr-5">
+                <h1>Welcome to the Dash App</h1>
+                <p>We're going to build a cool application using an MVC/MTV framework! This application was build with Django!</p>
+                <a href="/signin"><button class="btn btn-primary">Start</button></a>
+            </div>
+            <div class="row ml-5 mr-5">
+                <div class="col-4">
+                    <h3>Manage Users</h3>
+                    <p>Using this application, you'll learn how to add, remove, and edit users for the application</p>
+                </div>
+                <div class="col-4">
+                    <h3>Leave Messages</h3>
+                    <p>Users will be able to leave a message to another user using this application</p>
+                </div>
+                <div class="col-4">
+                    <h3>Edit User Information</h3>
+                    <p>Admins will be able to edit another user's information (email address, first name, last name, etc.).</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

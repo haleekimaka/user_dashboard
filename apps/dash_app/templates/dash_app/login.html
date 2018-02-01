@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Signin</title>
+        {% load static %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+            crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'dash_app/dash_app.css' %}">
+
+    </head>
+
+    <body>
+        <div class "container">
+            <nav class="navbar navbar-custom">
+                <div class="navbar-header col-2">
+                    <a class="navbar-brand" href="/">
+                        <p class="dashlink m-0">Dash App</p>
+                    </a>
+                </div>
+                <ul class="nav navbar-nav col-8">
+                    <li class="active">
+                        <a href="/" class="white">Home</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav col-2">
+                    <li class="text-right">
+                        <a href="/signin" class="white">Sign In</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container p-3">
+            <h1>Signin</h1>
+            <br> {% if messages %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for message in messages %}
+                    <li>{{message}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            <br>
+            <form action="/login" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <div class="col-5">
+                        <input type="text" class="form-control d-inline" name="email">
+                        <br>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <div class="col-5">
+                        <input type="password" class="form-control d-inline" name="pwd">
+                        <br>
+                    </div>
+                </div>
+                <div class="form-group button">
+                    <input type="submit" class="btn btn-success" name="submit" value="Login">
+                </div>
+            </form>
+            <a href="/register" class="ml-3">Don't have an account? Register</a>
+        </div>
+    </body>
+
+</html>
